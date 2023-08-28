@@ -54,6 +54,7 @@ fun SplashScreenCompat(){
             colors = ButtonDefaults.buttonColors(Color(0xFF1976D2))
         ) {
             Text(text = "Get Started", fontWeight = FontWeight.Bold, style = TextStyle(Color.White))
+            Text(text = "new day", fontWeight = FontWeight.Bold)
 
         }
     }
