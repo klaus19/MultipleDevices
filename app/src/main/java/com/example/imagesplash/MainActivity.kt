@@ -9,6 +9,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.imagesplash.constants.Destinations
+import com.example.imagesplash.navigation.NavDestinations
 import com.example.imagesplash.ui.theme.ImageSplashTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,30 +19,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ImageSplashTheme {
+                val navController = rememberNavController()
                 val windowInfo = rememberWindowInfo()
 
-                if(windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact){
-                    // A surface container using the 'background' color from the theme
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        SplashScreenCompat()
-                    }
-                }else if  (windowInfo.screenWidthInfo is WindowInfo.WindowType.Medium){
-                     Surface(modifier = Modifier.fillMaxSize(),
-                         color = MaterialTheme.colorScheme.background) {
-                         SplashScreenMedium()
-                     }
+                val content = when (windowInfo.screenWidthInfo) {
+                    is WindowInfo.WindowType.Compact -> Destinations.SplashScreenCompat
+                    is WindowInfo.WindowType.Medium -> Destinations.SplashScreenCompat
+                    else ->Destinations.SplashScreenCompat
+                }
 
-                }else {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                       SplashScreenExpanded()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
 
-                    }
+                    NavDestinations(navController, content)
                 }
 
             }

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -22,10 +24,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.imagesplash.constants.Destinations
 
 
 @Composable
-fun SplashScreenCompat(){
+fun SplashScreenCompat(navController: NavController){
+
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp),
@@ -43,18 +49,21 @@ fun SplashScreenCompat(){
             contentScale = ContentScale.FillBounds, modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp))
-        Spacer(modifier = Modifier.height(52.dp))
+        Spacer(modifier = Modifier.height(100.dp))
         Button(
-            onClick = {  },
+            onClick = {
+                    navController.navigate(Destinations.onBoardingScreen1)
+
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp)
                 .padding(horizontal = 20.dp),
-            shape = MaterialTheme.shapes.medium,
-            colors = ButtonDefaults.buttonColors(Color(0xFF1976D2))
+            shape = RoundedCornerShape(percent = 50),
+            colors = ButtonDefaults.buttonColors(Color(0xFF039be5))
         ) {
             Text(text = "Get Started", fontWeight = FontWeight.Bold, style = TextStyle(Color.White))
-            Text(text = "new day", fontWeight = FontWeight.Bold)
+
 
         }
     }
